@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAEDED"
+    tools:context=".presentacion.presentacion">
+
+    <FrameLayout
+        android:id="@+id/presentacion1"
+        android:layout_width="304dp"
+        android:layout_height="493dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/presentacion2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/presentacion2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingLeft="65dp"
+            android:text="Desayunos..."
+            android:textSize="36sp"
+            app:fontFamily="@font/arizonia" />
+
+        <ImageView
+            android:id="@+id/desayuno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/desayuno" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="80dp"
+            android:padding="20dp"
+            android:text="Se ofresen los mejores y nutritivos desaunos"
+            app:fontFamily="monospace" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="85dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="416dp"
+        android:background="@drawable/icon_siguiente"
+        android:onClick="siguiente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/presentacion1" />
+
+</android.support.constraint.ConstraintLayout>

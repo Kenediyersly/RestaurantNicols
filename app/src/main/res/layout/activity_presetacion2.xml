@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9C640C"
+    tools:context=".presentacion.presetacion2">
+
+    <FrameLayout
+        android:id="@+id/presentacion2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingLeft="65dp"
+            android:text="Almuerzos..."
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="36sp"
+            android:textStyle="bold|italic"
+            app:fontFamily="@font/arizonia" />
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="527dp"
+            app:srcCompat="@drawable/almuerzos" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="80dp"
+            android:padding="20dp"
+            android:text="Se ofresen los mejores y nutritivos almuerzos"
+            android:textColor="@android:color/background_light"
+            app:fontFamily="monospace" />
+
+    </FrameLayout>
+
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="85dp"
+        android:layout_height="76dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="416dp"
+        android:background="@drawable/icon_siguiente"
+        android:onClick="siguiente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/presentacion1" />
+
+</android.support.constraint.ConstraintLayout>
