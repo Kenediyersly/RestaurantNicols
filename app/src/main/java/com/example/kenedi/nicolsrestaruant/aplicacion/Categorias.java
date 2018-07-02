@@ -5,14 +5,7 @@ public class Categorias extends Plato{
     String nombre;
     Plato plato;
 
-   public Categorias(){
 
-   }
-
-    public Categorias(String nombre, Plato plato) {
-        this.nombre = nombre;
-        this.plato = plato;
-    }
 
     public Categorias(String nombre, String descripcion, String estado, double presio, String nombre1, Plato plato) {
         super(nombre, descripcion, estado, presio);

@@ -6,16 +6,18 @@ public class Plato {
     String descripcion;
     String estado;
     double presio;
+    String imagen;
 
-    public Plato(){
+    public Plato(String nombre, String descripcion, String estado, double presio) {
 
     }
 
-    public Plato(String nombre, String descripcion, String estado, double presio) {
+    public Plato(String nombre, String descripcion, String estado, double presio, String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;
         this.presio = presio;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -48,5 +50,13 @@ public class Plato {
 
     public void setPresio(double presio) {
         this.presio = presio;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }
