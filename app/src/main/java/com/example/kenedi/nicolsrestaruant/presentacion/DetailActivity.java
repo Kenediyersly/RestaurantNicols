@@ -34,7 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         String[] places = resources.getStringArray(R.array.places);
         collapsingToolbar.setTitle(places[postion % places.length]);
 
-        String[] placeDetails = resources.getStringArray(R.array.place_details);
+        String[] placeDetails = resources.getStringArray(R.array.categorias_detall);
         TextView placeDetail = (TextView) findViewById(R.id.place_detail);
         placeDetail.setText(placeDetails[postion % placeDetails.length]);
 

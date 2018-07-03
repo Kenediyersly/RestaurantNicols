@@ -2,10 +2,14 @@ package com.example.kenedi.nicolsrestaruant.presentacion;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+
 
 
 import com.example.kenedi.nicolsrestaruant.R;
@@ -29,47 +35,30 @@ import static com.example.kenedi.nicolsrestaruant.basededatos.Instancias.DATABAS
 
 public class CardContentFragment extends Fragment {
 
-    RecyclerView rv;
-    List<Plato> platos;
-    Adapter adapter1;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
+                R.layout.recycler_view, container, false);
+        ListContentFragment.ContentAdapter adapter = new ListContentFragment.ContentAdapter(recyclerView.getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        return recyclerView;
 
-        rv = container.findViewById(R.id.my_recycler_view);
 
-
-        platos = new ArrayList<>();
-        adapter1 = (Adapter) new Adaptador(platos);
-        rv.setAdapter((RecyclerView.Adapter) adapter1);
-        DATABASE.getReference().getRoot().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                platos.removeAll(platos);
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Plato plato = snapshot.getValue(Plato.class);
-                    platos.add(plato);
-                }
-                ((RecyclerView.Adapter) adapter1).notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return rv;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView picture;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView avator;
         public TextView name;
         public TextView description;
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.item_card, parent, false));
-            picture = (ImageView) itemView.findViewById(R.id.card_image);
+            super(inflater.inflate(R.layout.item_list, parent, false));
+            avator = (ImageView) itemView.findViewById(R.id.card_image);
             name = (TextView) itemView.findViewById(R.id.card_title);
             description = (TextView) itemView.findViewById(R.id.card_text);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -77,12 +66,10 @@ public class CardContentFragment extends Fragment {
                 public void onClick(View v) {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra(DetailActivity2.EXTRA_POSITION, getAdapterPosition());
+                    intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
                     context.startActivity(intent);
                 }
             });
-
-            // Adding Snackbar to Action Button inside card
             Button button = (Button)itemView.findViewById(R.id.action_button);
             button.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -111,6 +98,48 @@ public class CardContentFragment extends Fragment {
                 }
             });
         }
+
     }
 
+    /**
+     * Adapter to display recycler view.
+     */
+    public static class ContentAdapter extends RecyclerView.Adapter<ListContentFragment.ViewHolder> {
+        // Set numbers of List in RecyclerView.
+        private static final int LENGTH = 18;
+
+        private final String[] mPlaces;
+        private final String[] mPlaceDesc;
+        private final Drawable[] mPlaceAvators;
+
+        public ContentAdapter(Context context) {
+            Resources resources = context.getResources();
+            mPlaces = resources.getStringArray(R.array.places);
+            mPlaceDesc = resources.getStringArray(R.array.place_desc);
+            TypedArray a = resources.obtainTypedArray(R.array.place_avator);
+            mPlaceAvators = new Drawable[a.length()];
+            for (int i = 0; i < mPlaceAvators.length; i++) {
+                mPlaceAvators[i] = a.getDrawable(i);
+            }
+            a.recycle();
+        }
+        @Override
+        public ListContentFragment.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new ListContentFragment.ViewHolder(LayoutInflater.from(parent.getContext()), parent);
+        }
+
+        @Override
+        public void onBindViewHolder(ListContentFragment.ViewHolder holder, int position) {
+            holder.avator.setImageDrawable(mPlaceAvators[position % mPlaceAvators.length]);
+            holder.name.setText(mPlaces[position % mPlaces.length]);
+            holder.description.setText(mPlaceDesc[position % mPlaceDesc.length]);
+        }
+
+        @Override
+        public int getItemCount() {
+            return LENGTH;
+        }
+
+
+    }
 }
